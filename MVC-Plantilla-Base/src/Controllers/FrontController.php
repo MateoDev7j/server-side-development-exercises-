@@ -31,13 +31,7 @@ class FrontController
             ErrorController::show_error404();
             return;
         }
-        /*if (
-            !class_exists($nombre_controlador)
-            || in_array($nombre_controlador, [self::class, DashboardController::class], true)
-        ){
-            DashboardController::index();
-            return;
-        }*/
+
         $controlador = new $nombre_controlador();
 
         // is_callable comprueba si ese método está en la clase y
