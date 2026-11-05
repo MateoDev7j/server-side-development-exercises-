@@ -52,11 +52,11 @@ class ArticuloRequest
             return;
         }
 
-        // 2. Situación: El identificador no tiene un formato válido (400 Bad Request)
         if (!ctype_digit($this->datos['id'])) {
             $this->httpCode = 400;
             $this->errores['id'] = 'El identificador debe ser un número entero válido.';
             return;
         }
+        //EL ERRO 404 YA LO TENEMOS EN ERRORCONTROLLER
     }
 }

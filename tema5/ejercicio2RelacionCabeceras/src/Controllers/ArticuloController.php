@@ -40,10 +40,8 @@ class ArticuloController
             return;
         }
 
-        // 3. Si es válido, le pedimos el ID limpio al Request y solicitamos la búsqueda al modelo
         $articulo = Articulo::buscarPorId($request->id());
 
-        // 4. Si el artículo solicitado no existe (404 Not Found)
         if ($articulo === null) {
             http_response_code(404);
             $this->pagina->render('articulo/buscar', [
@@ -53,7 +51,6 @@ class ArticuloController
             return;
         }
 
-        // 5. Si todo está correcto, mandamos el 200 OK y pasamos el artículo a la vista
         http_response_code(200);
         $this->pagina->render('articulo/buscar', [
             'articulo' => $articulo,
