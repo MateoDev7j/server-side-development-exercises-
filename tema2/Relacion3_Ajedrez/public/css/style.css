@@ -1,0 +1,29 @@
+/* Hace que los bordes de la tabla se junten bien */
+table {
+    border-collapse: collapse;
+    border: 3px solid blue; /* Borde exterior azul como en tu foto */
+}
+
+/* Define el tamaño de cada casilla cuadrada */
+td {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+}
+
+/* Colores alternos de las casillas */
+.blanca {
+    background-color: #ffffff;
+}
+.gris {
+    background-color: #e0e0e0; /* Color gris clarito */
+}
+
+/* Ajusta las imágenes para que quepan perfectas en la casilla */
+td img {
+    width: 85%;
+    height: 85%;
+    display: inline-block;
+}
