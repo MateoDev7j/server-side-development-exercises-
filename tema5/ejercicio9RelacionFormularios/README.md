@@ -1,10 +1,10 @@
-#  Formulario de Perfil Profesional (Patrón MVC en PHP)
+# 📋 Formulario de Perfil Profesional (Patrón MVC en PHP)
 
 Este proyecto es una aplicación web desarrollada en **PHP puro (Vanilla PHP)** bajo una arquitectura **MVC (Modelo-Vista-Controlador)** robusta y desacoplada. Cuenta con un sistema de **saneamiento y validación estricta en el servidor** mediante el patrón *Form Request*, asegurando la integridad de los datos frente a manipulaciones malintencionadas en el cliente.
 
 ---
 
-##  Características Clave
+## 🚀 Características Clave
 
 *   **Arquitectura MVC Limpia:** Separación total de responsabilidades (Enrutamiento, Controladores, Validación, Modelos de Dominio y Vistas).
 *   **Front Controller:** Punto de entrada único (`index.php`) encargado de gestionar todas las peticiones de la aplicación de forma dinámica.
@@ -14,7 +14,7 @@ Este proyecto es una aplicación web desarrollada en **PHP puro (Vanilla PHP)** 
 
 ---
 
-##  Arquitectura del Proyecto
+## 🛠️ Arquitectura del Proyecto
 
 El flujo sigue el estándar de diseño orientado a objetos con la siguiente estructura de carpetas:
 
@@ -41,7 +41,7 @@ El flujo sigue el estándar de diseño orientado a objetos con la siguiente estr
 
 ---
 
-##  Flujo de una Petición (Ciclo de Vida)
+## 🔄 Flujo de una Petición (Ciclo de Vida)
 
 1.  **Punto de Entrada:** `index.php` recibe los parámetros `controller` y `action` mediante una petición `POST` o `GET`.
 2.  **Enrutamiento:** Consultando `config.php`, el *Front Controller* instancia al controlador adecuado (`ContactoController`) y ejecuta su método.
@@ -54,7 +54,7 @@ El flujo sigue el estándar de diseño orientado a objetos con la siguiente estr
 
 ---
 
-##  Reglas de Validación Implementadas en Servidor
+## 🔒 Reglas de Validación Implementadas en Servidor
 
 Para mitigar ataques de inyección y manipulación de peticiones HTTP, el servidor valida de forma autónoma:
 
@@ -70,7 +70,7 @@ Para mitigar ataques de inyección y manipulación de peticiones HTTP, el servid
 
 ---
 
-## Instalación y Uso Local
+## 🛠️ Instalación y Uso Local
 
 1.  Clona este repositorio o copia los archivos dentro del directorio raíz de tu servidor local (ej. Apache en XAMPP/WampServer, Laragon o Docker).
 2.  Asegúrate de tener instalada una versión de **PHP 8.0 o superior**.
