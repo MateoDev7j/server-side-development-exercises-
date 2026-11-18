@@ -6,6 +6,7 @@ namespace Controllers;
 use Core\Pages;
 use Core\Session;
 use Models\UserModel;
+use Middlewares\AuthMiddleware;
 
 /** Gestiona el recurso usuario (UserModel). Aquí solo se consulta el perfil. */
 final class UserController
@@ -13,9 +14,8 @@ final class UserController
     public function perfil(): void
     {
         // Solo LEE la sesión; nunca la modifica.
-        if (!Session::has('user_id')) {
-            redirect('login');
-        }
+        $a  = new AuthMiddleware();
+        $a->handle();
 
         $usuario = (new UserModel())->findById((int) Session::get('user_id'));
         (new Pages())->render('user/perfil', ['usuario' => $usuario]);

@@ -12,18 +12,31 @@ final class Session
     // ---------- Etapa 1 y 4: arranque ----------
     public static function iniciar(): void
     {
+        
         if (session_status() === PHP_SESSION_ACTIVE) {
             return;
         }
-
-        // TODO (Etapa 4, Exp. B): ini_set de use_strict_mode,
-        //      use_only_cookies y use_trans_sid
-        // TODO (Etapa 4, Exp. B): detectar HTTPS dinámicamente
-        //      $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
-        // TODO (Etapa 4, Exp. B): session_set_cookie_params([...])
-        //      con httponly, samesite y secure
-
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            // TODO (Etapa 4, Exp. B): ini_set de use_strict_mode,
+            // use_only_cookies y use_trans_sid
+            ini_set('session.use_strict_mode', '1');
+            ini_set('session.use_only_cookies', '1');
+            ini_set('session.use_trans_sid', '0');
+            // TODO (Etapa 4, Exp. B): detectar HTTPS dinámicamente
+            // $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+            $esHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+            // TODO (Etapa 4, Exp. B): session_set_cookie_params([...])
+            // con httponly, samesite y secure
+            session_set_cookie_params([
+                'lifetime' => 0,
+                'path'     => '/',
+                'domain'   => '',
+                'secure'   => $esHttps,
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ]);
+            session_start();
+        }
     }
 
     // ---------- Etapa 1: métodos básicos ----------
@@ -78,6 +91,7 @@ final class Session
     // ---------- Etapa 4: regeneración del ID ----------
     public static function regenerar(): void
     {
+        session_regenerate_id(true);
         // TODO: session_regenerate_id(true)
     }
 
@@ -105,4 +119,5 @@ final class Session
         //       4) redirect('login');
         // TODO: si no caduca, actualizar 'ultima_actividad' con time()
     }
+    
 }
