@@ -99,25 +99,39 @@ final class Session
     public static function setFlash(string $clave, string $mensaje): void
     {
         // TODO: guardarlo dentro de $_SESSION['_flash'][$clave]
+        $_SESSION['_flash'][$clave]= $mensaje;
     }
 
     public static function getFlash(string $clave): ?string
     {
+        $mensaje = $_SESSION['_flash'][$clave] ?? null;
         // TODO: devolver el mensaje Y borrarlo en el mismo instante
-        return null;
+        unset($_SESSION['_flash'][$clave]);
+        return $mensaje;
     }
 
     // ---------- Etapa 6: caducidad por inactividad ----------
     public static function comprobarCaducidad(): void
     {
         // TODO: solo si existe 'user_id' en la sesión
-        // TODO: si han pasado más de INACTIVIDAD_MAX segundos desde
-        //       'ultima_actividad':
-        //       1) destruir la sesión
-        //       2) ¿qué falta para poder dejar un flash? (ver pista)
-        //       3) setFlash('error', 'Tu sesión ha caducado por inactividad')
-        //       4) redirect('login');
-        // TODO: si no caduca, actualizar 'ultima_actividad' con time()
+        if(self::has('user_id')){
+            $ahora = time();
+            $ultima = self::get('ultima_actividad', $ahora);
+            // TODO: si han pasado más de INACTIVIDAD_MAX segundos desde
+            //       'ultima_actividad':
+            if(($ahora - $ultima)> INACTIVIDAD_MAX){
+                //1) destruir la sesión
+                self::destruir();
+                //2) ¿qué falta para poder dejar un flash? (ver pista)
+                self::iniciar();
+                //3) setFlash('error', 'Tu sesión ha caducado por inactividad')
+                self::setFlash('error','Tu sesión ha caducado por inactividad');
+                //4) redirect('login');
+                redirect('login');
+            }
+            // TODO: si no caduca, actualizar 'ultima_actividad' con time()
+            self::set('ultima_actividad', $ahora);
+        }
     }
     
 }

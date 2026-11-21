@@ -17,7 +17,10 @@ final class AuthController
     // y pasadlos a la vista (la vista no accede a Session).
     public function showLogin(): void
     {
-        (new Pages())->render('auth/login', ['error' => null, 'info' => null]);
+        (new Pages())->render('auth/login', [
+            'error' => Session::getFlash('error'), 
+            'info' => Session::getFlash('info'),
+            ]);
     }
 
     
@@ -34,13 +37,16 @@ final class AuthController
             Session::set('user_id', $usuario['id']);
             redirect('perfil');
         }
-
+        //Implementamos mensaje flash si falla el correo o la contraseña
+        Session::setFlash('error','Correo o contraseña incorrectos');
         redirect('login');
     }
     public function logout(): void
     {
         // TODO (Etapa 2): Session::destruir() y redirect('login')
         Session::destruir();
+        Session::iniciar();
+        Session::setFlash('info','Has cerrado sesion correctamente.');
         redirect('login');
     }
 }
