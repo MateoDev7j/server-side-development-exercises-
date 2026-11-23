@@ -1,0 +1,34 @@
+[
+    {
+        "tipo_incidencia": "Hardware",
+        "prioridad": "Baja",
+        "cliente": "afasdfa",
+        "descripcion": "asfadfdaf",
+        "tecnicos": "4",
+        "horas": 12,
+        "sistemas": [
+            "Windows",
+            "Movil"
+        ],
+        "captura": "97dacbc3a6fc2713.jpg",
+        "observaciones": "sfgsagfGsdgd",
+        "id": 1,
+        "coste": 0
+    },
+    {
+        "tipo_incidencia": "Software",
+        "prioridad": "Alta",
+        "cliente": "adfadf",
+        "descripcion": "agdagdagadg",
+        "tecnicos": "3",
+        "horas": 12,
+        "sistemas": [
+            "Linux",
+            "Movil"
+        ],
+        "captura": "3e2fbb81f21c6ebd.jpg",
+        "observaciones": "dagdagdag",
+        "id": 2,
+        "coste": 1440
+    }
+]

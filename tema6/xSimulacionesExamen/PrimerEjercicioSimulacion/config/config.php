@@ -1,0 +1,9 @@
+<?php
+declare(strict_types=1);
+// Controlador y acción que se ejecutan cuando la URL no indica ninguno
+
+//Direccion base del proyecto para el navegador
+define('BASE_URL', '/tema6/xSimulacionesExamen/PrimerEjercicioSimulacion');
+define('UPLOADS_DIR', BASE_PATH . '/public/uploads/');
+define('UPLOADS_URL', BASE_URL . '/uploads/');
+define('TAM_MAX', (2 * 1024 * 1024));

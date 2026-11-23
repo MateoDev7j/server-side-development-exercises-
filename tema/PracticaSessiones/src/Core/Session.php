@@ -1,0 +1,137 @@
+<?php
+declare(strict_types=1);
+
+namespace Core;
+
+final class Session
+{
+    // Tiempo máximo que puede pasar sin que el usuario haga ninguna petición
+    // Valor para pruebas (segundos). En producción sería mucho mayor.
+    private const INACTIVIDAD_MAX = 60;
+
+    // ---------- Etapa 1 y 4: arranque ----------
+    public static function iniciar(): void
+    {
+        
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            return;
+        }
+        if (session_status() === PHP_SESSION_NONE) {
+            // TODO (Etapa 4, Exp. B): ini_set de use_strict_mode,
+            // use_only_cookies y use_trans_sid
+            ini_set('session.use_strict_mode', '1');
+            ini_set('session.use_only_cookies', '1');
+            ini_set('session.use_trans_sid', '0');
+            // TODO (Etapa 4, Exp. B): detectar HTTPS dinámicamente
+            // $https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off';
+            $esHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+            // TODO (Etapa 4, Exp. B): session_set_cookie_params([...])
+            // con httponly, samesite y secure
+            session_set_cookie_params([
+                'lifetime' => 0,
+                'path'     => '/',
+                'domain'   => '',
+                'secure'   => $esHttps,
+                'httponly' => true,
+                'samesite' => 'Lax',
+            ]);
+            session_start();
+        }
+    }
+
+    // ---------- Etapa 1: métodos básicos ----------
+    public static function get(string $clave, mixed $defecto = null): mixed
+    {
+        return $_SESSION[$clave] ?? $defecto;
+    }
+
+    public static function set(string $clave, mixed $valor): void
+    {
+        $_SESSION[$clave] = $valor;
+    }
+
+    public static function has(string $clave): bool
+    {
+        // TODO
+        return isset($_SESSION[$clave]);
+        //Añadido por mateo: devolvemos false o true si la session
+        //existe en nuestro servidor
+    }
+
+    public static function remove(string $clave): void
+    {
+        // TODO
+        unset($_SESSION[$clave]);
+        //Añadido por mateo: removemos la session mediante la clave
+        //del array
+    }
+
+    // ---------- Etapa 1 y 2: cierre de sesión ----------
+    public static function destruir(): void
+    {
+        // Etapa 2 (TODO): completar con los 3 pasos del apartado 3.6
+        $_SESSION = [];
+
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
+        }
+        //destruimos la session
+        session_destroy();
+    }
+
+    // ---------- Etapa 4: regeneración del ID ----------
+    public static function regenerar(): void
+    {
+        session_regenerate_id(true);
+        // TODO: session_regenerate_id(true)
+    }
+
+    // ---------- Etapa 5: mensajes flash ----------
+    public static function setFlash(string $clave, string $mensaje): void
+    {
+        // TODO: guardarlo dentro de $_SESSION['_flash'][$clave]
+        $_SESSION['_flash'][$clave]= $mensaje;
+    }
+
+    public static function getFlash(string $clave): ?string
+    {
+        $mensaje = $_SESSION['_flash'][$clave] ?? null;
+        // TODO: devolver el mensaje Y borrarlo en el mismo instante
+        unset($_SESSION['_flash'][$clave]);
+        return $mensaje;
+    }
+
+    // ---------- Etapa 6: caducidad por inactividad ----------
+    public static function comprobarCaducidad(): void
+    {
+        // TODO: solo si existe 'user_id' en la sesión
+        if(self::has('user_id')){
+            $ahora = time();
+            $ultima = self::get('ultima_actividad', $ahora);
+            // TODO: si han pasado más de INACTIVIDAD_MAX segundos desde
+            //       'ultima_actividad':
+            if(($ahora - $ultima)> INACTIVIDAD_MAX){
+                //1) destruir la sesión
+                self::destruir();
+                //2) ¿qué falta para poder dejar un flash? (ver pista)
+                self::iniciar();
+                //3) setFlash('error', 'Tu sesión ha caducado por inactividad')
+                self::setFlash('error','Tu sesión ha caducado por inactividad');
+                //4) redirect('login');
+                redirect('login');
+            }
+            // TODO: si no caduca, actualizar 'ultima_actividad' con time()
+            self::set('ultima_actividad', $ahora);
+        }
+    }
+    
+}
