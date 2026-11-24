@@ -1,0 +1,22 @@
+body { font-family: system-ui, sans-serif; margin: 0; background: #f3f4f6; color: #222; }
+header { display: flex; justify-content: space-between; align-items: center; background: #1f2937; color: #fff; padding: 12px 24px; }
+header nav a { color: #fff; margin-left: 16px; text-decoration: none; }
+header nav a:hover { text-decoration: underline; }
+main { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+footer { text-align: center; color: #666; font-size: .85rem; padding: 24px 0; }
+
+form p { margin: 12px 0; }
+label { display: block; font-weight: 600; margin-bottom: 4px; }
+input[type=text], select { width: 100%; padding: 8px; box-sizing: border-box; }
+button { background: #2563eb; color: #fff; border: 0; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+
+.mensaje-ok { background: #dcfce7; border-left: 4px solid #16a34a; padding: 10px 14px; }
+.mensaje-error { background: #fee2e2; border-left: 4px solid #dc2626; padding: 10px 14px; }
+.error { color: #b91c1c; font-size: .9rem; display: block; margin-top: 4px; }
+
+.galeria { display: flex; flex-wrap: wrap; gap: 16px; }
+.ficha { width: 180px; background: #fff; border-radius: 6px; box-shadow: 0 1px 4px rgba(0,0,0,.15); padding-bottom: 10px; overflow: hidden; }
+.ficha img { width: 100%; height: 260px; object-fit: cover; display: block; }
+.ficha h3 { font-size: .95rem; margin: 8px 10px 2px; }
+.ficha .autor { font-size: .8rem; color: #555; margin: 0 10px 6px; }
+.ficha .genero { display: inline-block; font-size: .7rem; background: #e5e7eb; border-radius: 10px; padding: 2px 8px; margin-left: 10px; }

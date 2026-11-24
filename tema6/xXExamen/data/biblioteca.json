@@ -1,0 +1,38 @@
+[
+    {
+        "titulo": "TITULO DE LIBRO 1",
+        "autor": "ÑLGVADG",
+        "genero": "ciencia ficción",
+        "anio": 2000,
+        "paginas": 100,
+        "portada": "986d7b454665ba35.jpg",
+        "id": 1
+    },
+    {
+        "titulo": "dasd",
+        "autor": "DSAD",
+        "genero": "novela",
+        "anio": 2000,
+        "paginas": 100,
+        "portada": "617ff139933434ed.jpg",
+        "id": 2
+    },
+    {
+        "titulo": "lolol",
+        "autor": "DSAD",
+        "genero": "ciencia ficción",
+        "anio": 2000,
+        "paginas": 100,
+        "portada": "8af9d916ee5cf669.jpg",
+        "id": 3
+    },
+    {
+        "titulo": "lolol",
+        "autor": "DSAD",
+        "genero": "novela",
+        "anio": 2000,
+        "paginas": 100,
+        "portada": "28ce5e113670d8ab.jpg",
+        "id": 4
+    }
+]

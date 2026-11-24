@@ -1,0 +1,2 @@
+{"titulo":"El círculo de los días","autor":"Ken Follett","genero":"novela","anio":2025,"paginas":800,"portada":"follett.jpg"}
+{"titulo":"The Secret of Secrets","autor":"Dan Brown","genero":"novela","anio":2025,"paginas":700,"portada":"brown.jpg"}
